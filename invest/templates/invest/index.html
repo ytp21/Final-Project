@@ -1,0 +1,85 @@
+{% extends "invest/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8" style="position: relative;">
+            <div class="mt-5 mb-3">
+                <span class="title-style ms-4 me-3">NEW RECORD</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" style="position: relative; bottom: 2px; color:rgb(255, 242, 56);" class="bi bi-sticky-fill" viewBox="0 0 16 16">
+                    <path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zm6 8.5a1 1 0 0 1 1-1h4.396a.25.25 0 0 1 .177.427l-5.146 5.146a.25.25 0 0 1-.427-.177V9.5z"/>
+                </svg>
+            </div>
+            <div id="create-btn" class="p-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <div id="create-bg" class="bg-border-radius purple-red"></div>
+                <div class="mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pen ms-3" style="padding-bottom: 3px;" viewBox="0 0 16 16">
+                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                    </svg>
+                    <span class="ms-2 mb-0" style="letter-spacing: 1px; font-weight: 500; ">Create</span>
+                </div>
+            </div>
+            <div class="collapse create" id="collapseExample">
+                <form id="create-form">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control form-control-sm" id="symbol" placeholder="">
+                                <label for="floatingInput" class="input-font">Symbol</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" class="form-control form-control-sm" id="marketExchange" placeholder="">
+                                <label for="floatingInput" class="input-font">Market Exchange</label>
+                            </div>
+                        </div>
+                        <p class="create-notice mt-1">* Use <span><a class="create-notice-link" href="https://www.google.com/finance/" style="text-decoration: none;">Google Finance</a></span>. Visit "About" for more info.</p>
+                        <div class="d-flex flex-row-reverse justify-content-between align-items-center">
+                            <button class="create-form-submit" type="submit">Save</button>
+                            <div id="alert-msg" class="ms-1 invalid-alert badge rounded-pill p-2" style="background-color: white;"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            {% if not message %}
+                <div class="mt-5">
+                    <span class="title-style ms-4 me-3">DASHBOARD</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" style="position: relative; bottom: 2px; color:rgb(125, 202, 253);" class="bi bi-grid-fill" viewBox="0 0 16 16">
+                        <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3z"/>
+                    </svg>
+                </div>
+            {% endif %}
+            {% for stock in stocks %}
+                <div id="dashboard" class="dashboard-btn mt-4" type="button">
+                    <div id="dashboard-bg" class="bg-border-radius purple-blue"></div>
+                    <a href="{% url 'stock' abbrev=stock.symbol %}" class="dashboard-record row px-4" data-symbol="{{ stock.symbol }}" data-market-exchange="{{ stock.market_exchange }}" data-average-buy-price="{{ stock.average_buy_price }}"> 
+                        <div class="col-4 col-sm-4 col-lg-6 my-auto" style="font-weight: 500;">
+                            {{ stock.name }}
+                        </div> 
+                        <div id="stock-price" class="col-5 col-sm-4 col-lg-3 my-auto">
+                            <div id="stock-price-value" class="my-auto"></div>
+                        </div> 
+                        <div id="status" class="col-3 col-sm-4 col-lg-3 my-auto text-center">
+                            <div id="loading">
+                                <div class="dot-flashing"></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+  </div>
+    
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'invest/createbtn_animation.js' %}"></script>
+    <script src="{% static 'invest/createbtn_postReq.js' %}"></script>
+    <script src="{% static 'invest/dashboard.js' %}"></script>
+    <script src="{% static 'invest/realtimePrice.js' %}"></script>
+{% endblock %}

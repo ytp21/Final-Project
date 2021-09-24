@@ -1,0 +1,39 @@
+{% extends "invest/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="container-fluid">
+  <div class="row mb-4">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <p class="title-style mx-4 mt-5">ABOUT US</p>
+      <div class="box-style pt-3 px-4 pb-1">
+        <p class="about-us-text text-grey">Trading Journal aims to better help you track your trades more efficiently and in an organized manner. Through this platform, you can record your trades, ideas and thoughts without the hassle of paperwork, allow you to focus on your strategies that may arise as you monitor your trade performance throughout the trading event.</p>
+      </div>
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+  <div class="row mb-4">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <p class="title-style mx-4 mt-5">FAQ</p>
+      <div class="box-style py-3 px-4">
+        <div class="my-3">
+          <p class="about-us-text question-text mb-2">How to create a trade record?</p>
+          <p class="about-us-text text-grey mb-2">Sign in to your account, then select create button on your dashboard and fill up the form. Please use <span><a href="https://www.google.com/finance/" style="text-decoration: none;">Google Finance</a></span> to obtain the info required to fill in the Symbol and Market Exchange of a stock.</p>
+          <p class="about-us-text text-grey">For example, the symbol and market exchange for Tesla Inc shown in Google Finance are <span class="text-orange">TSLA</span> and <span class="text-orange">NASDAQ</span> respectively. Using these results, input symbol as <span class="text-green">TSLA</span> and market exchange as <span class="text-green">NASDAQ</span> in the form to create a trade record for Tesla Inc.</p>
+          <p class="about-us-text text-grey">The query on top of the search bar in your Google Finance will result in <span class="text-red">NASDAQ: TSLA</span>. As a general rule of thumb, the sentence on the left (before the colon) is the market exchange while the sentence on the right (after the colon) is the symbol.</p>
+        </div>
+      </div>
+      <div class="box-style mt-4 py-3 px-4">
+        <div class="my-3">
+          <p class="about-us-text question-text mb-2">How frequent will the market price and company info be updated?</p>
+          <p class="about-us-text text-grey mb-2">It will be updated automatically in every 5 minutes</p>
+        </div>
+      </div>
+      
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+{% endblock %}

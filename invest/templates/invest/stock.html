@@ -1,0 +1,295 @@
+{% extends "invest/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row mb-4">
+            <div class="col-xl-2"></div>
+            <div class="col-xl-8">
+                <div class="row">
+                    <div class="col text-center mt-2">
+                        <p class="box-1a mb-1">{{ details.name }}</p>
+                        <p id="S-ME" data-currency="{{ details.currency }}" data-symbol="{{ details.symbol }}" data-market-exchange="{{ details.market_exchange }}" class="box-1b">{{ details.symbol }} &middot; {{ details.market_exchange }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-6 pt-4 pb-3">
+                        <div class="box-item p-3" style="height: 100%;">
+                            <p class="box-2a mt-2 ms-2">MARKET PRICE</p>
+                            <hr class="line-style">
+                            <div id="individual-price" class="d-flex flex-column justify-content-center align-items-center" style="height: 70%;">
+                                <div class="p-5">
+                                    <div class="dot-flashing mx-auto"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 pt-4 mb-3">
+                        <div class="box-item p-3">
+                            <p class="box-2a mt-2 ms-2">INFO</p>
+                            <hr class="line-style">
+                            <div class="d-flex flex-row justify-content-between">
+                                <p class="ms-2 me-3 box-3a">Previous Close</p>
+                                <div id="prev-close" class="me-2">
+                                    <div class="mt-2 me-3 ms-3">
+                                        <div class="dot-flashing mx-auto"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-between">
+                                <p class="ms-2 me-3 box-3a">Day Range</p>
+                                <div id="day-range" class="me-2">
+                                    <div class="mt-2 me-3 ms-3">
+                                        <div class="dot-flashing mx-auto"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-between">
+                                <p class="ms-2 me-3 box-3a">Market Cap</p>
+                                <div id="market-cap" class="me-2">
+                                    <div class="mt-2 me-3 ms-3">
+                                        <div class="dot-flashing mx-auto"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-between">
+                                <p class="ms-2 me-3 box-3a">Avg.Volume (30 Days)</p>
+                                <div id="volume" class="me-2">
+                                    <div class="mt-2 me-3 ms-3">
+                                        <div class="dot-flashing mx-auto"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-between">
+                                <p class="ms-2 me-3 box-3a">P/E Ratio</p>
+                                <div id="pe-ratio" class="me-2">
+                                    <div class="mt-2 me-3 ms-3">
+                                        <div class="dot-flashing mx-auto"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-between">
+                                <p class="ms-2 me-3 box-3a">Dividend Yield</p>
+                                <div id="dividend" class="me-2">
+                                    <div class="mt-2 me-3 ms-3">
+                                        <div class="dot-flashing mx-auto"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5 mb-3">
+                    <span class="title-style ms-4 me-3">ADD ACTIVITY</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" style="position: relative; bottom: 2px;" class="bi bi-journals" viewBox="0 0 16 16">
+                        <path d="M5 0h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2 2 2 0 0 1-2 2H3a2 2 0 0 1-2-2h1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1H1a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1H3a2 2 0 0 1 2-2z"/>
+                        <path d="M1 6v-.5a.5.5 0 0 1 1 0V6h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V9h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 2.5v.5H.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H2v-.5a.5.5 0 0 0-1 0z"/>
+                    </svg>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div id="trading-record-dashboard" class="box-item p-3 trading-record">
+                            <div id="trading-form-bg" class="bg-border-radius purple-blue"></div>
+                            <p id="item1" class="box-2a mt-2 ms-2">CREATE</p>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col col-md-8">
+                                    <form id="trading-form" class="px-3">
+                                        <div id="alert-msg-trading-form"></div>
+                                        <hr id="item2" class="line-style" style="margin-top: 5px; margin-bottom: 15px;">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Buy">
+                                                <label class="form-check-label" for="inlineRadio1">Buy</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Sell">
+                                                <label class="form-check-label" for="inlineRadio2">Sell</label>
+                                            </div>
+                                        </div>
+                                        <hr id="item2" class="line-style" style="margin-top: 10px;">
+                                        <div class="row" style="margin-top: 25px;">
+                                            <div class="col text-center">
+                                                <div class="dates">
+                                                    <label for="Date" class="box-4a ms-1">Date</label>
+                                                    <input type="text" autocomplete="off" id="date-input" class="form-control buysell-input" placeholder="d/m/yyyy" required>
+                                                </div>
+                                            </div>
+                                            <div class="col text-center">
+                                                <label for="Time" class="box-4a ms-1">Time</label>
+                                                <input type="time" id="time-input" class="form-control buysell-input" required>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col">
+                                                <div class="d-flex flex-row align-items-center justify-content-center">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label class="box-4b ms-2 mt-1" for="flexCheckDefault">
+                                                        Set datetime as now
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-top: 20px;">
+                                            <div class="col text-center">
+                                                <label for="Price" class="box-4a ms-1">Market Price</label>
+                                                <input id="price" type="text" class="form-control buysell-input" placeholder="Price" aria-label="Price">
+                                                <div id="passwordHelpInline" class="box-4b d-flex flex-row">
+                                                    <div>*</div>
+                                                    <div class="ms-1 text-start">Positive integer with 3 decimal places only</div>
+                                                </div>
+                                            </div>
+                                            <div class="col text-center">
+                                                <label for="Quantity" class="box-4a ms-1">Quantity</label>
+                                                <input id="quantity" type="text" class="form-control buysell-input" placeholder="Units" aria-label="Quantity">
+                                                <div id="passwordHelpInline" class="box-4b d-flex flex-row">
+                                                    <div>*</div>
+                                                    <div class="ms-1">Input in unit</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-2"></div>
+                                            <div class="col-8 text-center">
+                                                <label for="Additional Fees" class="box-4a ms-1">Additional Fees</label>
+                                                <input id="additional-fees" type="text" class="form-control buysell-input" placeholder="Costs" aria-label="Additional Fees">
+                                                <div id="passwordHelpInline" class="box-4b d-flex flex-row">
+                                                    <div>*</div>
+                                                    <div class="ms-1 text-start">Optional and can be left blank</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-2"></div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <button id="form-submit-btn" style="margin-top: 35px; margin-bottom: 20px;" type="submit" class="btn btn-outline-dark w-25">Add</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="trade-portfolio">
+                    <div class="mt-5 pt-4">
+                        <span class="title-style ms-4 me-3">MY TRADING</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-border-width" style="position: relative; bottom: 2px;"  viewBox="0 0 16 16">
+                            <path d="M0 3.5A.5.5 0 0 1 .5 3h15a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-2zm0 5A.5.5 0 0 1 .5 8h15a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1zm0 4a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                    </div>
+                    <div class="row mt-4 scrollbar-style">
+                        <div id="trade-record" class="mb-2">
+                            <div class="p-5">
+                                <div class="dot-flashing mx-auto"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-5 pt-4">
+                        <span class="title-style ms-4 me-3">PORTFOLIO</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-richtext-fill" style="position: relative; bottom: 2px;" viewBox="0 0 16 16">
+                            <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM7 4.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zm-.861 1.542 1.33.886 1.854-1.855a.25.25 0 0 1 .289-.047l1.888.974V7.5a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V7s1.54-1.274 1.639-1.208zM5 9h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm0 2h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1z"/>
+                        </svg>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-lg-6 pt-4 mb-3">
+                            <div class="box-item p-3">
+                                <p class="box-2a mt-2 ms-2">INFO</p>
+                                <hr class="line-style">
+                                <div class="d-flex flex-row justify-content-between">
+                                    <p class="ms-2 me-3 box-7a">Invested Capital</p>
+                                    <div id="invested-capital" class="me-2 box-7a">
+                                        <div class="mt-2 me-3 ms-3">
+                                            <div class="dot-flashing mx-auto"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between">
+                                    <p class="ms-2 me-3 box-7a">Net Worth</p>
+                                    <div id="net-worth" class="me-2 box-7a">
+                                        <div class="mt-2 me-3 ms-3">
+                                            <div class="dot-flashing mx-auto"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between">
+                                    <p class="ms-2 me-3 box-7a">Unrealized P/L ({{ details.currency }})</p>
+                                    <div id="unrealized-value" class="me-2">
+                                        <div class="mt-2 me-3 ms-3">
+                                            <div class="dot-flashing mx-auto"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between">
+                                    <p class="ms-2 me-3 box-7a">Unrealized P/L (%)</p>
+                                    <div id="unrealized-pct" class="me-2">
+                                        <div class="mt-2 me-3 ms-3">
+                                            <div class="dot-flashing mx-auto"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="performance" class="col-12 col-lg-6 pt-4 mb-3">
+                            <div class="box-item p-3">
+                                <p class="box-2a mt-2 ms-2">PERFORMANCE</p>
+                                <hr class="line-style" style="margin-bottom: 27px;">
+                                <div class="d-flex flex-row justify-content-between" style="padding-left: 20px;">
+                                    <p class="ms-4 me-3 box-7a">Realized P/L</p>
+                                    <div id="realized-value">
+                                        <div class="mt-2 me-5 ms-3">
+                                            <div class="dot-flashing mx-auto"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between">
+                                    <p class="ms-4 me-3 box-7a">(-) Additional Fees</p>
+                                    <div id="additionalFees">
+                                        <div class="mt-2 me-5 ms-3">
+                                            <div class="dot-flashing mx-auto"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="line-style-black">
+                                <div class="d-flex flex-row justify-content-between">
+                                    <p id="statusPL" class="ms-2 me-3"></p>
+                                    <div id="profit-loss">
+                                        <div class="mt-2 me-5 ms-3">
+                                            <div class="dot-flashing mx-auto"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="history-performance" class="row mt-4">
+                        <div class="col">
+                            <div class="box-item p-3">
+                                <p id="item1" class="box-2a mt-2 ms-2">HISTORY</p>
+                                <hr class="line-style">
+                                <div id="performance-record">
+                                    <div class="p-5">
+                                        <div class="dot-flashing mx-auto"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'invest/stock_info.js' %}"></script>
+    <script src="{% static 'invest/myTrading.js' %}"></script>
+    <script>
+        $(function() {
+            $('.dates #date-input').datepicker({
+                'format': 'd/m/yyyy',
+                'autoclose': true,
+            });
+        });
+    </script>
+{% endblock %}

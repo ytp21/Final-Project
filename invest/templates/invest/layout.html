@@ -1,0 +1,181 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="{% static 'invest/bootstrap-datepicker.css' %}" rel="stylesheet">
+    <script src="{% static 'invest/bootstrap-datepicker.js' %}"></script>
+    <link href="{% static 'invest/styles.css' %}" rel="stylesheet">
+    <script src="{% static 'invest/sidebar.js' %}"></script>
+    {% block script %}
+    {% endblock %}
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+      </symbol>
+      <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+      </symbol>
+      <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+      </symbol>
+    </svg>
+
+    <header class="ps-1 header-style">
+      <div class="container-fluid d-flex justify-content-between d-flex align-items-center" style="grid-template-columns: 1fr 2fr; height: 100%;">
+        <div>
+          <button id="sidebar-toggler" class="nav-toggler-style collapsed" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-text-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+              </svg>
+          </button>
+          <span class="logo-style ms-5">PLANNER</span>  
+        </div>
+        
+        {% if user.is_authenticated %}
+        <div class="flex-shrink-0 dropdown pe-2">
+          <a href="#" class="d-block text-decoration-none" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{% static 'invest/Default_User_Icon.png' %}" alt="mdo" width="38" height="38" class="rounded-circle user-icon">
+          </a>
+          <ul class="dropdown-menu text-small shadow dropdown-style" aria-labelledby="dropdownUser2">
+            <li class="username-style mx-3">{{ user.username }}</li>    
+            <li><hr class="dropdown-divider"></li>         
+            <li><a class="dropdown-item list-style" href="{% url 'logout' %}">Logout</a></li>
+          </ul>
+        </div>
+        {% endif %}
+
+      </div>
+    </header>
+    
+    <div class="d-flex flex-row">
+      <div id="sidebar-large" class="sidebar-large sidebar-right-shadow">
+        <div class="d-flex flex-column flex-shrink-0 bg-white" style="height: 100%">
+          <p class="text-main-large">MAIN</p>
+          <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+              <a href="{% url 'index' %}" class="d-flex align-items-center ps-4 nav-link-style home-nav" aria-current="page">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-house me-3" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                  <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                </svg>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'about' %}" class="d-flex align-items-center ps-4 nav-link-style about-nav">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-info-circle me-3" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                </svg>
+                About
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    
+      <div id="sidebar-small" class="sidebar-small sidebar-right-shadow">
+        <div class="d-flex flex-column flex-shrink-0 bg-white" style="height: 100%">
+          <p class="text-main-small">MAIN</p>
+          <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+            <li class="nav-item">
+              <a href="{% url 'index' %}" class="nav-link nav-link-small d-flex flex-column home-nav" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-house nav-link-small-icon" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                  <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                </svg>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'about' %}" class="nav-link nav-link-small d-flex flex-column about-nav" title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-info-circle nav-link-small-icon" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                </svg>
+                About
+              </a>
+            </li>
+            <li>
+          </ul>
+        </div>
+      </div>
+      
+      <div id="main">
+          <div class="modal fade" id="myTradingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
+              <div class="modal-content">
+                <div class="modal-header">
+                  <div class="d-flex flex-column">
+                    <h5 class="modal-title" id="modalLabel1"></h5>
+                    <p class="modal-title" id="modalLabel2"></p>
+                    <p class="modal-title" id="modalLabel3"></p>
+                  </div>
+                  <button type="button" class="btn-close mt-0 mb-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="alert-msg-modal"></div>
+                <div class="modal-body" id="modalBody">
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-warning" id="btnSubmit">Save changes</button>
+                  <button type="button" class="btn btn-danger" id="btnDelete">Delete</button>
+                  <button type="button" class="btn btn-primary" id="btnEdit">Edit Note</button>
+                  <button type="button" class="btn btn-primary" id="btnAdd">Add Note</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% if user.is_authenticated or login_register_view %}
+          <div class="main-style p-4">
+            {% block body %}
+            {% endblock %}
+          </div>
+        {% else %}
+          {% if not login_register_view %}
+            <div class="main-style p-4 d-flex align-items-center">
+              <div class="welcome-page mx-auto d-flex align-items-center justify-content-center flex-column px-5 py-3">
+                <div class="greeting-font">Hello!</div>
+                <div class="greeting-font1">Start your trade record by signing in or register for a new account if you haven't already. It's always free</div>
+                <form class="d-flex flex-row justify-content-center mt-4 mx-2 mb-3">
+                  <button formaction="{% url 'login' %}" type="submit" class="welcome-page-btn sign-in-btn">Sign In</button>
+                  <button formaction="{% url 'register' %}" type="submit" class="welcome-page-btn register-btn">Register</button>
+                </form>
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+        <footer class="footer-style">
+          <p class="footer-text">Stock Planner @ 2021</p>
+        </footer>
+      </div>
+
+    </div>
+  </body>
+</html>
