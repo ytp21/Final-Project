@@ -909,16 +909,17 @@ function load_portfolioInfo() {
                 value = `- ${currency}${editedValue}`;
                 unrealizedClass = 'red-losses';
             } else if (PLvalue == 0) {
-                pct = '-';
+                pctText = '-';
+                value = '-';
                 unrealizedClass = 'box-7a';
             }
 
             document.querySelector('#invested-capital').innerHTML = `${currency}${investedCapital}`;
             document.querySelector('#net-worth').innerHTML = `${currency}${netWorth}`;
-            document.querySelector('#unrealized-value').className = `me-2 ${unrealizedClass}`
-            document.querySelector('#unrealized-pct').className = `me-2 ${unrealizedClass}`
-            document.querySelector('#unrealized-value').innerHTML = value
-            document.querySelector('#unrealized-pct').innerHTML = pctText
+            document.querySelector('#unrealized-value').className = `me-2 ${unrealizedClass}`;
+            document.querySelector('#unrealized-pct').className = `me-2 ${unrealizedClass}`;
+            document.querySelector('#unrealized-value').innerHTML = value;
+            document.querySelector('#unrealized-pct').innerHTML = pctText;
         })
 }
 
