@@ -5,7 +5,11 @@ Stock Planner is a trading journal site which allows users, who register for fre
 ## Distinctiveness and Complexity
 Stock Planner is a website that is completely different compare to the previous projects in terms of theme (trading journal), functionality (allowing users to add any stock into watchlist, adding and delete trade entry, viewing trade and stock performance) and designs (provides better user interface in terms of flexibility and viewing experience). This website is designed to be mobile-responsive, which no matter the size of your display, it will blend with your screen nicely and thus allow user to better control the website in any device. To ensure it is accessible to everyone, Stock Planner is uploaded and deployed on heroku server, where it can be run using this link - https://tp-tradeplanner.herokuapp.com/. 
 
+#### Video Demonstration
+Here is the demonstration video link - https://www.youtube.com/watch?v=_XCULDBPvI4
+
 #### How to run this website
-Just access this link - https://tp-tradeplanner.herokuapp.com/
+Just access to this link - https://tp-tradeplanner.herokuapp.com/
+
 
 
