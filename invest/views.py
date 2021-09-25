@@ -296,7 +296,10 @@ def trading(request):
     for invest in invests:
         total_cashInvested += invest
 
-    stock.average_buy_price = round(total_cashInvested/total_unitAmount, 2)
+    if stock.holding_units == 0:
+        stock.average_buy_price = 0
+    else:
+        stock.average_buy_price = round(total_cashInvested/total_unitAmount, 2)
 
     # Save all of the updated fields
     stock.save()
@@ -404,8 +407,10 @@ def edit_trading(request):
             for invest in invests:
                 total_cashInvested += invest
 
-            stock.average_buy_price = round(total_cashInvested/total_unitAmount, 2)
-
+            if stock.holding_units == 0:
+                stock.average_buy_price = 0
+            else:
+                stock.average_buy_price = round(total_cashInvested/total_unitAmount, 2)
 
     # Save all of the updated fields
     stock.save()
