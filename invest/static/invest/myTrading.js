@@ -416,6 +416,7 @@ function resetForm() {
     document.querySelector('input[type="time"][id="time-input"]').value = "";
     document.querySelector('#price').value = "";
     document.querySelector('#quantity').value = "";
+    document.querySelector('#additional-fees').value = "";
     document.querySelector('input[type=checkbox]').checked = false;
     document.querySelector('input[type=radio][name=inlineRadioOptions]:checked').checked = false;
     setTimeout(function() {
