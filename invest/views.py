@@ -33,7 +33,7 @@ def index(request):
                 'stocks': stocks,
             })
     elif not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('login'))
+        return render(request, "invest/index.html", {})
 
 @csrf_exempt
 def market_price(request):
