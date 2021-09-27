@@ -61,6 +61,9 @@ The starter files that are generated when creating Django project will not be me
 ## Additional Information
 This website obtains market price and stock info through the implementation of Beautiful Soup for web-scraping, a python-package that parse HTML and XML documents, pulling the data needed out from Google Finance. Hence, the best method to create stock watchlist is explained and shown on FAQ section in `about.html`. Other python packages that are required for this project to work are listed on `requirements.txt` file
 
+## Database
+Stock Planner uses SQlite as its database when running locally and changes to Heroku Postgres whenever it runs remotely. 
+
 #### Video Demonstration
 Here is the demonstration video link - https://www.youtube.com/watch?v=_XCULDBPvI4
 
