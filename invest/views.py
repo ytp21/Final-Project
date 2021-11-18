@@ -128,7 +128,7 @@ def create(request):
     content = requests.get(f'https://www.google.com/finance/quote/{symbol}:{marketExchange}')
     soup = BeautifulSoup(content.text, 'html.parser')
     try:
-        name = soup.find('h1', attrs={'class': 'zzDege'}).text
+        name = soup.find('div', attrs={'class': 'zzDege'}).text
         price = soup.find('div', attrs={'class': 'YMlKec fxKbKc'}).text
         currency = re.sub('[\d\.\,]+', '', price)
     except AttributeError:
